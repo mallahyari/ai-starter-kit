@@ -157,7 +157,11 @@ async def query_index(request: Request, input_query: UserQuery):
     
 
 @r.post("/ask1")
-async def query_index1(request: Request, input_query: UserQuery):
+async def query_index_another_approach(request: Request, input_query: UserQuery):
+    """ This is another function for streaming the response back to client. However, due
+        to some issues with langchain library streaming is not done properly. You can
+        see more information here: https://github.com/langchain-ai/langchain/issues/13072
+    """
     print(input_query)
     question = input_query.question
     relevant_docs = qdrant_vectordb.similarity_search(question, k=1)
