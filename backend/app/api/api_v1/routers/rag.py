@@ -28,6 +28,7 @@ import json
 import requests
 import asyncio
 import httpx
+import time
 
 
 
@@ -46,19 +47,13 @@ embedding_model = HuggingFaceEmbeddings(model_name=model_name, model_kwargs=mode
 stream_callback_handler = AsyncIteratorCallbackHandler()
 
 
-
-class GenerationStatisticsCallback(BaseCallbackHandler):
-    def on_llm_end(self, response: LLMResult, **kwargs) -> None:
-        print(response.generations[0][0].generation_info)
-
 chat_model = ChatOllama(
-# chat_model = Ollama(
-    base_url="http://localhost:11434",
+    # base_url="http://localhost:11434",
     model="llama2",
     verbose=True,
     # callbacks=[stream_callback_handler], 
     # streaming=True,
-    # callback_manager=CallbackManager([stream_callback_handler, GenerationStatisticsCallback()]),
+    callback_manager=CallbackManager([stream_callback_handler]),
 )
 
 template = """[INST] <<SYS>> Use the following pieces of context to answer the question at the end. 
@@ -134,26 +129,34 @@ async def query_index(request: Request, input_query: UserQuery):
     context = relevant_docs[0].page_content
     filled_prompt = QA_CHAIN_PROMPT.format(question=question, context=context)
     
-    # qa_chain = load_qa_chain(llm=chat_model, chain_type="stuff", prompt= QA_CHAIN_PROMPT)
     request_payload = {
         "model": "llama2",
-        "prompt": filled_prompt
+        "prompt": filled_prompt,
+        "format": "json"
     }
     
-    # Send a POST request to the LLM URL
-    async with httpx.AsyncClient() as client:
-        response = await client.post("http://localhost:11434/api/generate", json=request_payload)
+    try:
+        # Send a POST request to the LLM URL
+        async with httpx.AsyncClient() as client:
+            response = await client.post("http://localhost:11434/api/generate", json=request_payload, timeout=60.0)
 
-        async def stream_response_generator():
-            async for chunk in response.aiter_bytes():
-                yield chunk
-
-        # Prepare a StreamingResponse for streaming the response to the client
-        return StreamingResponse(
-            content=stream_response_generator(),
-            # headers=response.headers.items(),
-            status_code=response.status_code,
-        )
+            def stream_response_generator():
+                for chunk in response.iter_lines():
+                    
+                    # decoded_chunk = chunk.decode("utf-8")
+                    logger.info(f"Received chunk: {chunk}")
+                    json_data = json.loads(chunk)
+                    # yield json.dumps({"token": chunk['response']}) + "\n"
+                        
+                    yield json_data['response']
+                    time.sleep(1) 
+            return StreamingResponse(
+                content=stream_response_generator(),
+                media_type="text/event-stream"
+            )
+    except Exception:
+        return {"answer": "could not find the answer!"}
+        
     
 
 @r.post("/ask1")
@@ -174,7 +177,7 @@ async def query_index_another_approach(request: Request, input_query: UserQuery)
     
 
 async def run_call(relevant_docs, question: str, stream_callback_handler: AsyncIteratorCallbackHandler):
-    # qa_chain.callbacks = [stream_callback_handler]
+    qa_chain.callbacks = [stream_callback_handler]
     response = await qa_chain.acall({"input_documents": relevant_docs, "question": question})
     # response = await qa_chain.arun(input_documents=relevant_docs, question=question, return_only_outputs=False)
     return response
@@ -185,6 +188,7 @@ async def create_generator(relevant_docs, question: str, stream_callback_handler
     run = asyncio.create_task(run_call(relevant_docs, question, stream_callback_handler))  # Await the async task
 
     async for token in stream_callback_handler.aiter():
+        logger.info(token)
         yield token
 
     await run

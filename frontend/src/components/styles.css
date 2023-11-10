@@ -1,0 +1,28 @@
+.message {
+  display: flex;
+  align-items: center;
+  /* margin: 8px; */
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #e5e5e5;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
+
+.user-message {
+  background-color: #cde5fc;
+  color: white;
+  border: 0 solid #d9d9e3;
+}
+
+.ai-message {
+  background-color: rgba(247, 247, 248, 1);
+  color: #333;
+  border: 0 solid #d9d9e3;
+}
+
+.message-text {
+  text-align: left;
+  line-height: 1.6rem;
+  font-size: 14px;
+}
