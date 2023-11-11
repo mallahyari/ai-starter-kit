@@ -1,0 +1,42 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+karma-*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directory
+node_modules
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# custom
+.env
+.vscode
+.DS_Store
+.idea
+scripts
+build
+lib
+dist
+assets
+
+backend/__pycache__
+
+backend/.env
+backend/.env*
+client/.env
+client/.env.*
