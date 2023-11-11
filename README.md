@@ -6,6 +6,12 @@ A **minimal** code base for creating AI apps to do Question Answering (QA) over 
 
 This project is inspired by [local-ai-stack](https://github.com/ykhli/local-ai-stack). However, their stack is entirely javascript based, and I needed a python based _backend_, so decided to create this project.
 
+
+
+https://github.com/mallahyari/ai-starter-kit/assets/28068313/5b65f268-d5e2-499e-92ca-38dc4067e940
+
+
+
 ## Stack
 
 - 🦙 Inference: [Ollama](https://github.com/jmorganca/ollama)
