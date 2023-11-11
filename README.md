@@ -6,11 +6,7 @@ A **minimal** code base for creating AI apps to do Question Answering (QA) over 
 
 This project is inspired by [local-ai-stack](https://github.com/ykhli/local-ai-stack). However, their stack is entirely javascript based, and I needed a python based _backend_, so decided to create this project.
 
-
-
 https://github.com/mallahyari/ai-starter-kit/assets/28068313/5b65f268-d5e2-499e-92ca-38dc4067e940
-
-
 
 ## Stack
 
@@ -69,3 +65,7 @@ You can change configurations in `.config` file, such as the _embedding model_, 
 ## Additional Use Cases
 
 Although current app only support pdf files, it's very straightforward to add other types of files such as text files, etc. Also, you can easily add the open-ended chat in addition to QA over document use case.
+
+## Discussion and Contribution
+
+If you have any comment or feedback, please don't hesitate to use the `Discussions` section and open a new topic. You can also reach out directly via [Linkedin](https://www.linkedin.com/in/mehdiallahyari/) or [Twitter](https://twitter.com/MehdiAllahyari)
