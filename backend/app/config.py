@@ -11,7 +11,6 @@ class Settings(BaseSettings):
     qdrant_host: str = 'localhost'
     qdrant_api_key: str | None = None
     qdrant_collection_name: str = 'qa_collection'
-    openai_api_key: str | None = None
     embedding_settings: EmbeddingSettings = EmbeddingSettings()
     text_splitter: dict = { "chunk_size": 100, "chunk_overlap": 20}
 
