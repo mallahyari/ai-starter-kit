@@ -21,21 +21,21 @@ This project is inspired by [local-ai-stack](https://github.com/ykhli/local-ai-s
 git clone https://github.com/mallahyari/ai-starter-kit.git
 ```
 
-2. Install backend dependencies
+2. Install backend dependencies:
 
 ```bash
 cd backend/app
 pip install -r requirements.txt
 ```
 
-3. Install frontend dependencies
+3. Install frontend dependencies:
 
 ```bash
 cd frontend
 npm install
 ```
 
-4. Start the Qdrant vector database (you need Docker). See [here](https://github.com/qdrant/qdrant) for other options information
+4. Start the Qdrant vector database (you need Docker). See [here](https://github.com/qdrant/qdrant) for other options information:
 
 ```bash
 docker run -p 6333:6333 qdrant/qdrant
@@ -44,13 +44,13 @@ docker run -p 6333:6333 qdrant/qdrant
 5. Install Ollama
    Instructions are [here](https://github.com/jmorganca/ollama#ollama)
 
-6. Run the FastApi server (from inside `backend` directory)
+6. Run the FastApi server (from inside `backend` directory):
 
 ```bash
 python app/main.py
 ```
 
-7. Open a new terminal and start the React development server (from inside `frontend`)
+7. Open a new terminal and start the React development server (from inside `frontend`):
 
 ```bash
 npm start
