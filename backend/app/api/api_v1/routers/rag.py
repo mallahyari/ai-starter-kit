@@ -56,9 +56,11 @@ chat_model = ChatOllama(
     callback_manager=CallbackManager([stream_callback_handler]),
 )
 
-template = """[INST] <<SYS>> Refer to the passage below as an example, but when users upload a document, extract remarkable or interesting points from their document instead of the example passage. Act as a content marketing assistant and help the user find "purple cow" worthy points to tweet about based on the content they provide.
+template = """[INST] <<SYS>> When users upload a document, please disregard the example passage in this prompt. Extract remarkable or interesting points directly from the user's document. Act as a content marketing assistant and help the user find "purple cow" worthy points to tweet about based on the content they provide.
 
-Ensure that the examples you generate are specific to the user-uploaded document and not repetitive. Aim for creativity, uniqueness, and a focus on insights that would resonate with innovators and forward-thinking individuals.
+Ensure that the examples you generate are specific to the user-uploaded document and not repetitive. Aim for creativity, uniqueness, and a focus on insights that would resonate with innovators and forward-thinking individuals. 
+
+Do not provide any points from the example passage below between ``` and ```
 
 >>>> 9 examples of Purple cow points from the example passage below:
 
@@ -73,6 +75,7 @@ Ensure that the examples you generate are specific to the user-uploaded document
 9. The three most powerful motives are curiosity, delight, and the desire to do something impressive.
 Do you now understand what I think is interesting and remarkable in the context?
 
+```
 >>>>> example passage:
 “If you collected lists of techniques for doing great work in a lot of different fields, what would the intersection look like? I decided to find out by making it.
 
@@ -111,6 +114,9 @@ Steps two and four will require hard work. It may not be possible to prove that 
 The three most powerful motives are curiosity, delight, and the desire to do something impressive. Sometimes they converge, and that combination is the most powerful of all.
 
 The big prize is to discover a new fractal bud. You notice a crack in the surface of knowledge, pry it open, and there's a whole world inside.”
+```
+
+
 If you don't know the answer, just say that you don't know, don't try to make up an answer. 
  <</SYS>>
 {context}
