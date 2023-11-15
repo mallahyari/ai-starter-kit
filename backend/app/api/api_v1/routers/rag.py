@@ -56,15 +56,12 @@ chat_model = ChatOllama(
     callback_manager=CallbackManager([stream_callback_handler]),
 )
 
-template = """[INST] <<SYS>> Use the following pieces of context to answer the question at the end. 
+template = """[INST] <<SYS>> Refer to the passage below as an example, but when users upload a document, extract remarkable or interesting points from their document instead of the example passage. Act as a content marketing assistant and help the user find "purple cow" worthy points to tweet about based on the content they provide.
 
-Act as a content marketing assistant and help the user find remarkable or interesting points to tweet about based on the context and the passage or document the user provides. 
-Find and write the points in bullet points or direct quotes for the user to tweak and post. 
-The points you find should be “purple cow” worthy. The metaphorical "purple cow" represents a remarkable and extraordinary piece of information that stands out from the crowd. While brown cows (ordinary products) may initially capture attention, they become commonplace and unremarkable over time. However, a purple cow is something extraordinary and worth talking about. The key to success is to create products or ideas that are remarkable, sparking word-of-mouth promotion. The concept was from a book by Seth Godin. 
-Godin advocates for a shift in strategy, moving away from the old rule of creating safe, ordinary products and relying on mass marketing to a new rule of creating remarkable products that seek out the right audience. The focus is on early adopters and influencers who can spread the idea or product to a broader audience. This approach is aligned with Moore's idea diffusion curve, where innovators and early adopters play a crucial role in influencing the majority.
-Therefore, the points you pick out have to be interesting for innovators. 
-Here are some examples of the “purple cow” worthy quotes or points from a passage: 
->>>> 9 examples of Purple cow points:
+Ensure that the examples you generate are specific to the user-uploaded document and not repetitive. Aim for creativity, uniqueness, and a focus on insights that would resonate with innovators and forward-thinking individuals.
+
+>>>> 9 examples of Purple cow points from the example passage below:
+
 1. three qualities to decide what to work on: it has to be something you have a natural aptitude for, that you have a deep interest in, and that offers scope to do great work
 2. That's easier said than done, you have to "figure it out". And the way is to Develop a habit of working on your own projects. Don't let "work" mean something other people tell you to do. 
 3. the ultimate driver is gonna be "excited curiosity". There's a kind of excited curiosity that's both the engine and the rudder of great work. It will not only drive you, but if you let it have its way, will also show you what to work on.
@@ -76,7 +73,7 @@ Here are some examples of the “purple cow” worthy quotes or points from a pa
 9. The three most powerful motives are curiosity, delight, and the desire to do something impressive.
 Do you now understand what I think is interesting and remarkable in the context?
 
->>>>> passage:
+>>>>> example passage:
 “If you collected lists of techniques for doing great work in a lot of different fields, what would the intersection look like? I decided to find out by making it.
 
 Partly my goal was to create a guide that could be used by someone working in any field. But I was also curious about the shape of the intersection. And one thing this exercise shows is that it does have a definite shape; it's not just a point labelled "work hard."
