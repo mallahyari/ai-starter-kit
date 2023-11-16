@@ -56,13 +56,11 @@ chat_model = ChatOllama(
     callback_manager=CallbackManager([stream_callback_handler]),
 )
 
-template = """[INST] <<SYS>> When users upload a document, please disregard the example passage in this prompt. Extract remarkable or interesting points directly from the user's document. Act as a content marketing assistant and help the user find "purple cow" worthy points to tweet about based on the content they provide.
+template = """[INST] <<SYS>>  Act as a content marketing assistant and help the user find "purple cow" worthy points to tweet about based on the content they provide.
 
 Ensure that the examples you generate are specific to the user-uploaded document and not repetitive. Aim for creativity, uniqueness, and a focus on insights that would resonate with innovators and forward-thinking individuals. 
 
-Do not provide any points from the example passage below between ``` and ```
-
->>>> 9 examples of Purple cow points from the example passage below:
+>>>> The following are examples of Purple cow points from the example passage below:
 
 1. three qualities to decide what to work on: it has to be something you have a natural aptitude for, that you have a deep interest in, and that offers scope to do great work
 2. That's easier said than done, you have to "figure it out". And the way is to Develop a habit of working on your own projects. Don't let "work" mean something other people tell you to do. 
@@ -75,46 +73,6 @@ Do not provide any points from the example passage below between ``` and ```
 9. The three most powerful motives are curiosity, delight, and the desire to do something impressive.
 Do you now understand what I think is interesting and remarkable in the context?
 
-```
->>>>> example passage:
-“If you collected lists of techniques for doing great work in a lot of different fields, what would the intersection look like? I decided to find out by making it.
-
-Partly my goal was to create a guide that could be used by someone working in any field. But I was also curious about the shape of the intersection. And one thing this exercise shows is that it does have a definite shape; it's not just a point labelled "work hard."
-
-The following recipe assumes you're very ambitious.
-
-The first step is to decide what to work on. The work you choose needs to have three qualities: it has to be something you have a natural aptitude for, that you have a deep interest in, and that offers scope to do great work.
-
-In practice you don't have to worry much about the third criterion. Ambitious people are if anything already too conservative about it. So all you need to do is find something you have an aptitude for and great interest in. [1]
-
-That sounds straightforward, but it's often quite difficult. When you're young you don't know what you're good at or what different kinds of work are like. Some kinds of work you end up doing may not even exist yet. So while some people know what they want to do at 14, most have to figure it out.
-
-The way to figure out what to work on is by working. If you're not sure what to work on, guess. But pick something and get going. You'll probably guess wrong some of the time, but that's fine. It's good to know about multiple things; some of the biggest discoveries come from noticing connections between different fields.
-
-Develop a habit of working on your own projects. Don't let "work" mean something other people tell you to do. If you do manage to do great work one day, it will probably be on a project of your own. It may be within some bigger project, but you'll be driving your part of it.
-
-What should your projects be? Whatever seems to you excitingly ambitious. As you grow older and your taste in projects evolves, exciting and important will converge. At 7 it may seem excitingly ambitious to build huge things out of Lego, then at 14 to teach yourself calculus, till at 21 you're starting to explore unanswered questions in physics. But always preserve excitingness.
-
-There's a kind of excited curiosity that's both the engine and the rudder of great work. It will not only drive you, but if you let it have its way, will also show you what to work on.
-
-What are you excessively curious about — curious to a degree that would bore most other people? That's what you're looking for.
-
-Once you've found something you're excessively interested in, the next step is to learn enough about it to get you to one of the frontiers of knowledge. Knowledge expands fractally, and from a distance its edges look smooth, but once you learn enough to get close to one, they turn out to be full of gaps.
-
-The next step is to notice them. This takes some skill, because your brain wants to ignore such gaps in order to make a simpler model of the world. Many discoveries have come from asking questions about things that everyone else took for granted. [2]
-
-If the answers seem strange, so much the better. Great work often has a tincture of strangeness. You see this from painting to math. It would be affected to try to manufacture it, but if it appears, embrace it.
-
-Boldly chase outlier ideas, even if other people aren't interested in them — in fact, especially if they aren't. If you're excited about some possibility that everyone else ignores, and you have enough expertise to say precisely what they're all overlooking, that's as good a bet as you'll find. [3]
-
-Four steps: choose a field, learn enough to get to the frontier, notice gaps, explore promising ones. This is how practically everyone who's done great work has done it, from painters to physicists.
-
-Steps two and four will require hard work. It may not be possible to prove that you have to work hard to do great things, but the empirical evidence is on the scale of the evidence for mortality. That's why it's essential to work on something you're deeply interested in. Interest will drive you to work harder than mere diligence ever could.
-
-The three most powerful motives are curiosity, delight, and the desire to do something impressive. Sometimes they converge, and that combination is the most powerful of all.
-
-The big prize is to discover a new fractal bud. You notice a crack in the surface of knowledge, pry it open, and there's a whole world inside.”
-```
 
 
 If you don't know the answer, just say that you don't know, don't try to make up an answer. 
