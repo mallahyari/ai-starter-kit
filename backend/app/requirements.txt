@@ -1,8 +1,8 @@
-'fastapi[all]'
+fastapi[all]
 langchain
 pydantic
 qdrant_client
-sentence_transformers
+sentence-transformers
 uvicorn
 structlog
 pypdf
